@@ -555,7 +555,11 @@ void CMainFrame::ReadFile()
 	SendEditor(SCI_SETMARGINWIDTHN, 0, nChars * margin_size);
 
 	// End Set up of margin number width /////
-	
+
+
+	// Set up a caret slop for ideal target scrolling on middle displaying lines on screen
+	SendEditor(SCI_SETYCARETPOLICY, CARET_SLOP, SendEditor(SCI_LINESONSCREEN) / 2);
+
 }
 
 void CMainFrame::WriteFile()
@@ -712,9 +716,7 @@ void CMainFrame::OnEnChangeEdit()
 		btnOkEnabled = FALSE;
 		m_buttonOK.UpdateWindow();
 		line_number = line_number - 1;
-
-		// Line scroll
-		SendEditor(SCI_LINESCROLL, 0, line_number - (SendEditor(SCI_LINESONSCREEN) / 2));
+				
 		// go to line
 		SendEditor(SCI_GOTOLINE, line_number);
 
@@ -734,8 +736,6 @@ void CMainFrame::OnEnChangeEdit()
 void CMainFrame::OnButtonOK()
 {
 	if (btnOkEnabled) {
-		// Line scroll
-		SendEditor(SCI_LINESCROLL, 0, line_number - (SendEditor(SCI_LINESONSCREEN) / 2));
 		// go to line
 		SendEditor(SCI_GOTOLINE, line_number);
 	}		
@@ -752,8 +752,6 @@ void CMainFrame::OnCheckBox()
 		if (btnOkEnabled) {
 			btnOkEnabled = FALSE;
 			m_buttonOK.UpdateWindow();
-			// Line scroll
-			SendEditor(SCI_LINESCROLL, 0, line_number - (SendEditor(SCI_LINESONSCREEN) / 2));
 			// go to line
 			SendEditor(SCI_GOTOLINE, line_number);
 		}
