@@ -9,6 +9,8 @@ This first version only support basic options and future versions will implement
 Final intent for this project is to implement it to my "Action Trace Profile" OH patch which is a kind of OH profile debugging assistant displaying in real-time executing line from profile for an OH bot taken action (logic decision) available here: https://github.com/Mudr0x/openholdembot/commit/63dabc7a14e1792cb9986028cb55258afc815f10 on my other Real-Time Assistant (RTA) for OH bot patch available here: https://github.com/Mudr0x/openholdembot/commit/cad41f0ee102fdfdb33bffdb07e558b104e97f30.
 This implementation will display real-time executing line ("Action Trace") as a hyperlink which will open this OpenPad when clicking on it to open the profile and autoscrolling and highlight this target line which could be very usefull for real-time profile debugging.
 
+![image](https://user-images.githubusercontent.com/78977383/116783685-6c110780-aa90-11eb-9c27-f4ba7430b80c.png)
+
 
 And never forget, you can learn more by sharing   ;)
  
