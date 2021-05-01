@@ -46,7 +46,7 @@ protected:
 		return ::SendMessage(hwndScintilla, Msg, wParam, lParam);
 	}
 	// Process notification from scintilla control
-//	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
+	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 	DECLARE_DYNAMIC(CMainFrame)
 
 // Attributes
@@ -75,6 +75,7 @@ protected:  // control bar embedded members
 	CEdit		m_editBox;
 	CButton		m_buttonOK, m_checkBox;
 	BOOL		btnOkEnabled = FALSE;
+	BOOL		textChanged = FALSE;
 	CString		m_strPathname;
 
 	int line_number = 0;
