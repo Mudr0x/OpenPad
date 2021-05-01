@@ -92,13 +92,15 @@ CMainFrame::~CMainFrame()
 
 }
 
-/*			// For future purpose of future version of Scintilla perhaps
-			// to bold margin number of caret line
-			// for the moment SCI_MARGINSETSTYLE is only allowed for text margin
+
 BOOL CMainFrame::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 {
 	NMHDR *phDR;
 	phDR = (NMHDR*)lParam;
+
+	/*			// For future purpose of future version of Scintilla perhaps
+				// to bold margin number of caret line
+				// for the moment SCI_MARGINSETSTYLE is only allowed for text margin
 	// does notification come from my scintilla window?
 	if (phDR != NULL && phDR->hwndFrom == hwndScintilla && phDR->code == SCN_UPDATEUI)
 	{
@@ -107,9 +109,14 @@ BOOL CMainFrame::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 		SendEditor(SCI_MARGINSETSTYLE, curLine, SC_WEIGHT_SEMIBOLD);
 		return TRUE; // we processed the message
 	}
+	*/
+
+	if (phDR != NULL && phDR->hwndFrom == hwndScintilla && phDR->code == SCN_MODIFIED)
+		textChanged = TRUE;
+
 	return CWnd::OnNotify(wParam, lParam, pResult);
 }
-*/
+
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -248,6 +255,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 //	SendEditor(SCI_SETMODEVENTMASK, SCN_UPDATEUI);  // For future purpose of future version of Scintilla perhaps
 													// to bold margin number of caret line
 													// for the moment SCI_MARGINSETSTYLE is only allowed for text margin
+
+	SendEditor(SCI_SETMODEVENTMASK, SCN_MODIFIED);
 
 	// End of set up of Scintilla control /////
 
@@ -612,7 +621,9 @@ void CMainFrame::OnFileOpen()
 
 void CMainFrame::OnFileSave()
 {
-	if (m_strPathname == "") OnFileSaveas();
+	if (m_strPathname == "" || textChanged) {
+		OnFileSaveas();
+	}
 	else WriteFile();
 }
 
@@ -653,6 +664,7 @@ void CMainFrame::OnFileSaveas()
 		SetWindowTitle();
 
 		WriteFile();
+		textChanged = FALSE;
 	}
 }
 
