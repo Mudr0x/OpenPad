@@ -10,6 +10,11 @@ Final intent for this project is to implement it to my "Action Trace Profile" OH
 This implementation will display real-time executing line ("Action Trace") as a hyperlink which will open this OpenPad when clicking on it to open the profile and autoscrolling and highlight this target line which could be very usefull for real-time profile debugging.
 
 
+
+![image](https://user-images.githubusercontent.com/78977383/116778606-2eea4c80-aa73-11eb-8c99-4fe8cdd5d743.png)
+
+
+
 And never forget, you can learn more by sharing   ;)
  
  
