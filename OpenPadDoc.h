@@ -11,47 +11,59 @@
 //
 //******************************************************************************
 
-// MainFrm.h : interface of the CMainFrame class
+// OpenPadDoc.h : interface of the COpenPadDoc class
 //
 
-#pragma once
+#include "ScintillaControl.h"
 
-class CMainFrame : public CFrameWnd
+#pragma once
+//#define SHARED_HANDLERS
+
+class COpenPadDoc : public CDocument
 {
-	
 protected: // create from serialization only
-	CMainFrame() noexcept;
-	DECLARE_DYNCREATE(CMainFrame)
+	COpenPadDoc() noexcept;
+	DECLARE_DYNCREATE(COpenPadDoc)
 
 // Attributes
 public:
+	CSciCtrl* p_docSciCtrl;
 
 // Operations
 public:
 
 // Overrides
 public:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual void Serialize(CArchive& ar);
+	virtual BOOL OnNewDocument();
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
+#ifdef SHARED_HANDLERS
+	virtual void InitializeSearchContent();
+	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);
+#endif // SHARED_HANDLERS
 
 // Implementation
 public:
-	virtual ~CMainFrame();
+	virtual ~COpenPadDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-public:  // control bar embedded members
-	CToolBar          m_wndToolBar;
-	CReBar            m_wndReBar;
-	CDialogBar        m_wndDlgBar;
-	CStatusBar        m_wndStatusBar;
+protected:
 
 // Generated message map functions
 protected:
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
 
+#ifdef SHARED_HANDLERS
+	// Helper function that sets search content for a Search Handler
+	void SetSearchContent(const CString& value);
+#endif // SHARED_HANDLERS
+
+#ifdef SHARED_HANDLERS
+private:
+	CString m_strSearchContent;
+	CString m_strThumbnailContent;
+#endif // SHARED_HANDLERS
 };
-
-
