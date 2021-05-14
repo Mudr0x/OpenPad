@@ -12,7 +12,7 @@ This implementation will display real-time executing line ("Action Trace") as a 
 ![image](https://user-images.githubusercontent.com/78977383/116783685-6c110780-aa90-11eb-9c27-f4ba7430b80c.png)
 
 
-05/13/2021: Release v.1.1
+05/14/2021: Release v.1.2
 
 + Add text search option and markers walker, with a total recast of the app that suits MFC Document/View SDI app recommendations.
 
