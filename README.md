@@ -14,7 +14,7 @@ This implementation will display real-time executing line ("Action Trace") as a 
 
 05/14/2021: Release v.1.1
 
-+ Add text search option and markers walker, with a total recast of the app that suits MFC Document/View SDI app recommendations.
++ Add text search option and markers walker, with a total recast of the app that suits MFC Document/View SDI app recommendations with its own Scintilla control wrapper.
 
 
 And never forget, you can learn more by sharing   ;)
