@@ -57,7 +57,7 @@ COpenPadApp::COpenPadApp() noexcept
 
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("OpenPad.AppID.NoVersion"));
+	SetAppID(appID);
 
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -72,6 +72,28 @@ COpenPadApp theApp;
 
 BOOL COpenPadApp::InitInstance()
 {
+	// Register the class, so that FindWindow can find us.
+	WNDCLASS wndcls;
+	memset(&wndcls, 0, sizeof(WNDCLASS)); // start with NULL defaults
+	wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW;
+	wndcls.lpfnWndProc = ::DefWindowProc;
+	wndcls.cbClsExtra = 0;
+	wndcls.cbWndExtra = 0;
+	wndcls.hInstance = AfxGetInstanceHandle();
+	wndcls.hIcon = LoadIcon(IDR_MAINFRAME); // or load a different icon
+	wndcls.hCursor = LoadCursor(IDC_ARROW);
+	wndcls.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	wndcls.lpszMenuName = NULL;
+	// Specify your own class name for using FindWindow later
+	wndcls.lpszClassName = className;
+
+	// Register the new class and exit if it fails
+	if (!AfxRegisterClass(&wndcls))
+	{
+		TRACE("OpenPad Class Registration Failed\n");
+		return false;
+	}
+
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
 	// visual styles.  Otherwise, any window creation will fail.
@@ -81,6 +103,12 @@ BOOL COpenPadApp::InitInstance()
 	// in your application.
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
+
+	// Assign an unique GUID for the app
+	// And we use the GUID here, so that we are sure 
+	// the app is 100% single instance app
+	if (CSingleInstance::Create(guid) == FALSE)
+		return FALSE;
 
 	CWinApp::InitInstance();
 
@@ -103,7 +131,7 @@ BOOL COpenPadApp::InitInstance()
 	// of your final executable, you should remove from the following
 	// the specific initialization routines you do not need
 	// Change the registry key under which our settings are stored
-	SetRegistryKey(_T("OpenPad\\OpenPadApp"));
+	SetRegistryKey(regKey);
 	LoadStdProfileSettings(4);  // Load standard INI file options (including MRU)
 
 
@@ -151,6 +179,14 @@ int COpenPadApp::ExitInstance()
 
 	return CWinApp::ExitInstance();
 }
+
+void COpenPadApp::WakeUp(LPCTSTR aCommandLine) const
+{
+	// Call parent class to handle the basic
+	// functionality, (set foreground)
+	CSingleInstance::WakeUp(aCommandLine);
+}
+
 
 // COpenPadApp message handlers
 

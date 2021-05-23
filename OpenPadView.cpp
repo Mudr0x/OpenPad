@@ -195,11 +195,12 @@ int COpenPadView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	if (p_viewSciCtrl == NULL)             // Have we already done this bit?
 	{
-		p_viewSciCtrl = new CSciCtrl;     // Create the Gridctrl object
+		p_viewSciCtrl = new CSciCtrl;     // Create the CSciCtrl object
 		if (!p_viewSciCtrl) return -1;
 
+
 		int IDC_SCINTILLA = 10000;
-		if (!p_viewSciCtrl->Create(STR_SCINTILLAWND, _T("Title"),
+		if (!p_viewSciCtrl->Create(STR_SCINTILLAWND, _T("OpenPad"),
 			WS_CHILD | WS_VISIBLE,
 			CRect(0, 0, 0, 0), this, (UINT)IDC_SCINTILLA))
 		{

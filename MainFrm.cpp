@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_CLOSE()
 	ON_WM_DROPFILES()
+	ON_WM_COPYDATA()
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -108,6 +109,21 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
+
+	cs.lpszClass = className;
+
+	return TRUE;
+}
+
+
+BOOL CMainFrame::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
+{
+	CMainFrame* pFrame = (CMainFrame*)AfxGetApp()->m_pMainWnd;
+	m_gotoEdit = (CEdit*)pFrame->m_wndDlgBar.GetDlgItem(ID_GOTOEDIT);
+
+	// Absolute line number retrieving from OpenHoldem Action Trace Profile module
+	CString strRec = (LPCSTR)(pCopyDataStruct->lpData);
+	m_gotoEdit->SetWindowText(strRec);
 
 	return TRUE;
 }

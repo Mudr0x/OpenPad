@@ -46,10 +46,12 @@ public:  // control bar embedded members
 	CReBar            m_wndReBar;
 	CDialogBar        m_wndDlgBar;
 	CStatusBar        m_wndStatusBar;
+	CEdit*			  m_gotoEdit;
 
 // Generated message map functions
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg BOOL OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct);
 	DECLARE_MESSAGE_MAP()
 
 };
