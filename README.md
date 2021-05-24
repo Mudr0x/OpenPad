@@ -11,6 +11,12 @@ This implementation will display real-time executing line ("Action Trace") as a 
 
 ![image](https://user-images.githubusercontent.com/78977383/119259726-d9b3dd80-bbcf-11eb-84be-84e230cf2c89.png)
 
+
+Last news:
+
+05/24/2021: ATP for RTA with OpenPad fast profile debugging patch final attempt of this repository now commits at: https://github.com/Mudr0x/openholdembot/commit/55803cf323d135c787b46f2b6c7bc788caeedadc
+
+
 Revision history:
 
 05/23/2021: Release v.1.2
